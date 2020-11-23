@@ -13,8 +13,8 @@ def write_file(filename, content):
         with open(rule_file, 'w') as f:
             f.write(content)
         return 0
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
         return 1
 
 
@@ -33,8 +33,8 @@ def update_write_file(filename, content, _name):
         with open(rule_file, 'w') as f:
             f.write(content)
         return 0
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
         return 1
 
 
@@ -48,8 +48,8 @@ def delete_file(_name):
     try:
         os.system("rm -rf " + _file)
         return 0
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
         return 1
 
 
@@ -58,8 +58,8 @@ def get_rules():
     try:
         for root, dirs, files in os.walk(filepath):
             rs.append(files)
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
     return rs
 
 
@@ -73,6 +73,6 @@ def get_detail(filename):
         content = os.popen('head -1 ' + rule_file).read()
         values = eval(content[1:len(content)])
         return values
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
         return {'name': '', 'alert': '', 'expr': '', '_for': '', 'level': '', 'summary': '', 'description': ''}

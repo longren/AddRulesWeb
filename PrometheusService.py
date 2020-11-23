@@ -30,8 +30,8 @@ def create_rules_model(name, expr, level, _for, desc, model, service):
         rule = rule.replace('{{ service }}', service)
         rs = write_file(name, rule)
         return rs
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
         return 1
 
 
@@ -47,8 +47,8 @@ def update_rules_model(name, expr, level, _for, desc, model, _name, service):
         rule = rule.replace('{{ service }}', service)
         rs = update_write_file(name, rule, _name)
         return rs
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
         return 1
 
 
@@ -56,8 +56,8 @@ def delete_rules_model(_name):
     try:
         rs = delete_file(_name)
         return rs
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
         return 1
 
 

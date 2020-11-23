@@ -5,6 +5,7 @@ import json
 from PrometheusService import create_rules_model, get_rule, get_rule_detail, update_rules_model, delete_rules_model
 import PrometheusConfig
 import os
+from importlib import reload
 
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -27,8 +28,8 @@ def add():
         rs = create_rules_model(name, expr, level, _for, desc, model, service)
         if rs == 1:
             return json.dumps('error! please check the path is exist and Permission!')
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
         content = json.dumps('error')
 
     resp = Response(content)
@@ -50,8 +51,8 @@ def update():
         rs = update_rules_model(name, expr, level, _for, desc, model, _name, service)
         if rs == 1:
             return json.dumps('error! please check the path is exist and Permission!')
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
         content = json.dumps('error!')
 
     resp = Response(content)
@@ -64,8 +65,8 @@ def delete():
     try:
         _name = request.form['_name']
         delete_rules_model(_name)
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
         content = json.dumps('error! please check the path is exist and Permission!')
     resp = Response(content)
     return resp
@@ -75,8 +76,8 @@ def delete():
 def get_rules_list():
     try:
         content = get_rule()
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
         content = []
 
     resp = Response(json.dumps(content))
@@ -88,8 +89,8 @@ def get_rules_detail():
     try:
         name = request.form['name']
         content = get_rule_detail(name)
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
         content = {'name': '', 'alert': '', 'expr': '', '_for': '', 'level': '', 'summary': '', 'description': ''}
     resp = Response(json.dumps(content))
     return resp
@@ -119,8 +120,8 @@ def get_info():
     try:
         result['servers'] = PrometheusConfig.services
         result['alerm'] = PrometheusConfig.alarms
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
     return json.dumps(result)
 
 
@@ -132,8 +133,8 @@ def refresh():
         if rs.strip() != '':
             return json.dumps("refresh fail, please check the prometheus.yml")
         return json.dumps("refresh success!")
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
         return json.dumps("refresh fail")
 
 if __name__ == '__main__':
